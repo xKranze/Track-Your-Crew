@@ -100,3 +100,13 @@ role_id: INT to hold reference to employee role
 manager_id: INT to hold reference to another employee that is the manager of the current employee (null if the employee has no manager)
 
 You might want to use a separate file that contains functions for performing specific SQL queries you'll need to use. A constructor function or class could be helpful for organizing these. You might also want to include a seeds.sql file to pre-populate your database, making the development of individual features much easier.
+
+
+https://www.npmjs.com/package/mysql2
+npm i mysql2
+
+https://www.npmjs.com/package/console.table
+npm i console.table
+
+inquirer
+npm i inquirer@8.2.4
