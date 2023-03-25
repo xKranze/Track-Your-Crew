@@ -29,16 +29,55 @@ connection.connect(function (err) {
   startQuestions();
 });
 
-function startQuestions(){
+function startQuestions() {
   inquirer.prompt([
-
-
+    //choose a shape choices circle,triangle, or square.
+    {
+      type: 'list',
+      name: 'initiate',
+      message: 'What would you like to do?',
+      choices: [
+        'View all departments',
+        'View all roles',
+        'View all employees',
+        'Add a department',
+        'Add a role',
+        'Add an employee',
+        'Update an employee role'
+      ]
+    },
   ])
-
-  
-
-
 }
+.then(({ initiate }) => {
+  switch (initiate) {
+    case 'View all departments':
+      // action placeholder
+      break;
+
+      case 'View all roles':
+      // action placeholder
+      break;
+
+      case 'View all employees':
+      // action placeholder
+      break;
+
+      case 'Add a department':
+      // action placeholder
+      break;
+
+      case 'Add a role':
+      // action placeholder
+      break;
+
+      case 'Add an employee':
+      // action placeholder
+      break;
+      
+      case 'Update an employee role':
+      // action placeholder
+  }
+})
 
 // Default response for any other request (Not Found)
 app.use((req, res) => {
