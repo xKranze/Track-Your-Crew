@@ -25,7 +25,7 @@ const db = mysql.createConnection(
 //throws error if theres issue connecting with a err message and stack trace if successful then app title "track your crew" will display!
 connection.connect(function (err) {
   if (err) {
-    console.error('Error connecting to database: ' + err.stack);
+    console.error('Error connecting to employees database: ' + err.stack);
     return;
   }
   console.log(`
