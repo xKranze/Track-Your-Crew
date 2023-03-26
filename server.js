@@ -22,9 +22,12 @@ const db = mysql.createConnection(
   },
   console.log(`Connected to the employees_db database.`)
 );
-
+//throws error if theres issue connecting with a err message and stack trace if successful then app title "track your crew" will display!
 connection.connect(function (err) {
-  if (err) => err ? console.log(err) :
+  if (err) {
+    console.error('Error connecting to database: ' + err.stack);
+    return;
+  }
   console.log(`
   ████████╗██████╗  █████╗  ██████╗██╗  ██╗    ██╗   ██╗ ██████╗ ██╗   ██╗██████╗      ██████╗██████╗ ███████╗██╗    ██╗
 ╚══██╔══╝██╔══██╗██╔══██╗██╔════╝██║ ██╔╝    ╚██╗ ██╔╝██╔═══██╗██║   ██║██╔══██╗    ██╔════╝██╔══██╗██╔════╝██║    ██║
