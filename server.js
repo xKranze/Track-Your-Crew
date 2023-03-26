@@ -59,37 +59,200 @@ function startQuestions() {
     },
   ])
 
-.then((initiate) => {
-  console.log('initiate')
- switch (initiate) {
-    case 'View all departments':
-      // action placeholder
-      break;
+    .then(data => {
+      switch (data.initiate) {
+        case 'View all departments':
+          connection.query('SELECT * FROM department', function (err, results) {
+            console.table(results);
+          });
+          break;
 
-      case 'View all roles':
-      // action placeholder
-      break;
+        case 'View all roles':
+          connection.query('SELECT * FROM role', function (err, results) {
+            console.table(results);
+          });
+          break;
 
-      case 'View all employees':
-      // action placeholder
-      break;
+        case 'View all employees':
+          connection.query('SELECT * FROM employee', function (err, results) {
+            console.table(results);
+          });
+          break;
 
-      case 'Add a department':
-      // action placeholder
-      break;
+        case 'Add a department':
+          inquirer.prompt([
+            {
+              type: 'text',
+              name: 'department',
+              message: 'What department would you like to add?',
+            },
+          ])
+            .then(data => {
+              connection.query(`INSERT INTO department(department_name) VALUES ("${data.department}");`, (err, result) => {
+                if (err) {
+                  console.log(err);
+                } else {
+                  console.log("Success!");
+                  connection.query('SELECT * FROM department', function (err, results) {
+                    console.table(results);
+                  });
+                }
+              });
+            })
+          break;
 
-      case 'Add a role':
-      // action placeholder
-      break;
+        case 'Add a role':
+          var departments = [];
+          connection.query('SELECT department_name FROM department', function (err, results) {
+            for (var i = 0; i < results.length; i++) {
+              departments.push(results[i].department_name);
+            }
+          });
 
-      case 'Add an employee':
-      // action placeholder
-      break;
-      
-      case 'Update an employee role':
-      // action placeholder
-  }
-})
+          inquirer.prompt([
+            {
+              type: 'text',
+              name: 'title',
+              message: 'What is the title of the new role?',
+            },
+            {
+              type: 'list',
+              name: 'department',
+              message: 'What department does the new role belong to?',
+              choices: departments
+            },
+            {
+              type: 'text',
+              name: 'salary',
+              message: 'What is the salary of the new role?',
+            }
+          ])
+            .then(data => {
+              connection.query(`INSERT INTO role(title, department_id, salary) VALUES ("${data.title}", ${departments.indexOf(data.department) + 1}, ${data.salary});`, (err, result) => {
+                if (err) {
+                  console.log(err);
+                } else {
+                  console.log("Success!");
+                  connection.query('SELECT * FROM role', function (err, results) {
+                    console.table(results);
+                  });
+                }
+              });
+            })
+          break;
+
+        case 'Add an employee':
+          var roles = [];
+          connection.query('SELECT title FROM role', function (err, results) {
+            for (var i = 0; i < results.length; i++) {
+              roles.push(results[i].title);
+            }
+          });
+
+          var employees = [];
+          connection.query('SELECT first_name, last_name FROM employee', function (err, results) {
+            for (var i = 0; i < results.length; i++) {
+              employees.push(results[i].first_name + " " + results[i].last_name);
+            }
+          });
+
+          inquirer.prompt([
+            {
+              type: 'text',
+              name: 'first',
+              message: 'What is the first name of the employee?'
+            },
+            {
+              type: 'text',
+              name: 'last',
+              message: 'What is the last name of the employee?'
+            },
+            {
+              type: 'list',
+              name: 'role',
+              message: `What is the employee's new role?`,
+              choices: roles
+            },
+            {
+              type: 'list',
+              name: 'manager',
+              message: `Who is the employee's manager?`,
+              choices: employees
+            }
+          ])
+            .then(data => {
+              connection.query(`INSERT INTO employee(first_name, last_name, role_id, manager_id) VALUES ("${data.first}", "${data.last}", ${roles.indexOf(data.role) + 1}, ${employees.indexOf(data.manager) + 1});`, (err, result) => {
+                if (err) {
+                  console.log(err);
+                } else {
+                  console.log("Success!");
+                  connection.query('SELECT * FROM employee', function (err, results) {
+                    console.table(results);
+                  });
+                }
+              });
+            })
+          break;
+
+        case 'Update an employee role':
+          var roles = [];
+          connection.query('SELECT title FROM role', function (err, results) {
+            for (var i = 0; i < results.length; i++) {
+              roles.push(results[i].title);
+            }
+          });
+
+          var employees = [];
+          connection.query('SELECT first_name, last_name FROM employee', function (err, results) {
+            for (var i = 0; i < results.length; i++) {
+              employees.push(results[i].first_name + " " + results[i].last_name);
+            }
+          });
+
+          inquirer.prompt([
+            {
+              type: 'list',
+              name: 'employee',
+              message: 'Whose role would you like to update?',
+              choices: employees
+            },
+            {
+              type: 'list',
+              name: 'role',
+              message: 'What is the new role of the employee?',
+              choices: roles
+            }
+          ])
+            .then(data => {
+              connection.query(`UPDATE employee SET role_id = ${roles.indexOf(data.role)+1} WHERE id = ?`, (err, result) => {
+                if (err) {
+                  console.log(err);
+                } else {
+                  console.log("Success!");
+                  connection.query('SELECT * FROM employee', function (err, results) {
+                    console.table(results);
+                  });
+                }
+              });
+            })
+
+
+
+
+
+
+
+
+          connection.query(`UPDATE employee SET role_id = ? WHERE id = ?`, role_id, employee_id, (err, result) => {
+            if (err) {
+              console.log(err);
+            }
+            console.table(result);
+          });
+          break;
+        default:
+      }
+    })
 }
 
 // Default response for any other request (Not Found)
