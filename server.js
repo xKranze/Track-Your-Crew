@@ -4,6 +4,7 @@ const showTable = require('console.table');
 const inquirer = require('inquirer');
 const PORT = process.env.PORT || 3001;
 const app = express();
+const Sequelize = require('sequelize');
 
 // Express middleware
 app.use(express.urlencoded({ extended: false }));
@@ -11,14 +12,14 @@ app.use(express.json());
 
 
 // Connect to database via mysql
-const db = mysql.createConnection(
+const connection = mysql.createConnection(
   {
     host: 'localhost',
     // MySQL username,
-    user: process.env.DB_USER,
+    user: 'root',//process.env.DB_USER,
     // MySQL password
-    password: process.env.DB_PASSWORD,
-    database: process.env.DB_NAME
+    password: 'Chester630!',//process.env.DB_PASSWORD,
+    database: 'employees_db'//process.env.DB_NAME
   },
   console.log(`Connected to the employees_db database.`)
 );
