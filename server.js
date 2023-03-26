@@ -47,9 +47,10 @@ function startQuestions() {
       ]
     },
   ])
-}
-.then(({ initiate }) => {
-  switch (initiate) {
+
+.then((initiate) => {
+  console.log('initiate')
+ switch (initiate) {
     case 'View all departments':
       // action placeholder
       break;
@@ -78,6 +79,7 @@ function startQuestions() {
       // action placeholder
   }
 })
+}
 
 // Default response for any other request (Not Found)
 app.use((req, res) => {
