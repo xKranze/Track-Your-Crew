@@ -33,9 +33,9 @@ https://coding-boot-camp.github.io/full-stack/nodejs/how-to-install-nodejs
 -type "node index.js" to start.
 
 
-Please view the video demo link below to see application in action:
+-Please view the video demo link below to see application in action:
 
-<a href="placeholder">video</a>
+<a href="https://drive.google.com/file/d/1ZKiPHH7evIBdSU2yH_-TA2P5Lam8PLrJ/view">TRACK YOUR CREW DEMO</a>
 
     
 ![alt text](./assets/trackyourcrewsnip.jpg)
