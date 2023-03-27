@@ -19,6 +19,7 @@ const connection = mysql.createConnection({
   password: process.env.DB_PASSWORD,
   database: process.env.DB_NAME
 });
+console.log('Successfully Connected to the employees_db Database!');
 //throws error if theres issue connecting with a err message and stack trace if successful then app title "track your crew" will display!
 connection.connect(function (err) {
   if (err) {
