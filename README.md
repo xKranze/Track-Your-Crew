@@ -43,7 +43,7 @@ https://coding-boot-camp.github.io/full-stack/nodejs/how-to-install-nodejs
 
 ## Credits
 
-Test to ASCII https://patorjk.com/software/taag/#p=display&f=3D-ASCII&t=consolelog
+Text to ASCII https://patorjk.com/software/taag/#p=display&f=3D-ASCII&t=consolelog
 
 Node.js - https://nodejs.org/en/
 
