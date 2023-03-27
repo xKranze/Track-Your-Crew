@@ -4,7 +4,8 @@ const showTable = require('console.table');
 const inquirer = require('inquirer');
 const PORT = process.env.PORT || 3001;
 const app = express();
-const Sequelize = require('sequelize');
+const env = require('dotenv').config();
+
 
 // Express middleware
 app.use(express.urlencoded({ extended: false }));
@@ -12,17 +13,12 @@ app.use(express.json());
 
 
 // Connect to database via mysql
-const connection = mysql.createConnection(
-  {
-    host: 'localhost',
-    // MySQL username,
-    user: 'root',//process.env.DB_USER,
-    // MySQL password
-    password: process.env.DB_PASSWORD,
-    database: 'employees_db'//process.env.DB_NAME
-  },
-  console.log(`Connected to the employees_db database.`)
-);
+const connection = mysql.createConnection({
+  host: process.env.DB_HOST,
+  user: process.env.DB_USER,
+  password: process.env.DB_PASSWORD,
+  database: process.env.DB_NAME
+});
 //throws error if theres issue connecting with a err message and stack trace if successful then app title "track your crew" will display!
 connection.connect(function (err) {
   if (err) {
