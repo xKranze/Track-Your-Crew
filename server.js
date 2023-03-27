@@ -6,11 +6,9 @@ const PORT = process.env.PORT || 3001;
 const app = express();
 const env = require('dotenv').config();
 
-
 // Express middleware
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
-
 
 // Connect to database via mysql
 const connection = mysql.createConnection({
@@ -56,8 +54,8 @@ function startQuestions() {
         'Update an employee role',
         'Exit'
       ]
-    },
-  ])
+    }
+ ])
     .then(data => {
 
       //switch case to handle option picked
@@ -265,7 +263,6 @@ function startQuestions() {
       }
     })
 }
-
 // Default response for any other request (Not Found)
 app.use((req, res) => {
   res.status(404).end();
