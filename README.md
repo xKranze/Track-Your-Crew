@@ -21,17 +21,9 @@ Please be sure to have the following installed prior to running this application
 
 https://coding-boot-camp.github.io/full-stack/nodejs/how-to-install-nodejs
 
--Install the following npm packages:
-
-npm i inquirer@8.2.4
-
-npm install express
-
-npm i mysql2
-
-npm i console.table
 
 ## Usage
+
 -Access application in terminal.
 
 -run npm i
